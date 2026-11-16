@@ -6,6 +6,7 @@ import Profile from './views/Profile';
 import Upload from './views/Upload';
 import Single from './views/Single';
 import Demo from './views/Demo';
+import Login from './views/Login';
 
 const App = () => {
   return (
@@ -18,7 +19,7 @@ const App = () => {
           <Route path="Single" element={<Single />} />
           <Route path='Demo' element={<Demo />} />
           <Route path='Single' element={<Single />} />
-          {/* TODO: add missing routes */}
+          <Route path='Login' element={<Login />}/>
         </Route>
       </Routes>
     </BrowserRouter>

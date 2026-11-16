@@ -8,7 +8,6 @@ const Home = () => {
   const [selectedItem, setSelectedItem] = useState(null);
   const {mediaArray} = useMedia();
 
- console.log(mediaArray);
   return (
     <>
       <h2 id='mymediatitle'>My Media</h2>

@@ -1,31 +1,12 @@
-import {useState, useEffect} from 'react';
+import {useState} from 'react';
 import MediaRow from '../components/MediaRow.jsx';
 import SingleView from '../components/SingleView.jsx';
-import { fetchData } from '../utils/fetchData.js';
+import { useMedia } from '../hooks/apiHooks.js';
 
-const MEDIA_API = import.meta.env.VITE_MEDIA_API;
-const AUTH_API = import.meta.env.VITE_AUTH_API;
 
 const Home = () => {
   const [selectedItem, setSelectedItem] = useState(null);
-  //aluksi täytyy olla empty array, muuten .map kaatuu
-  const [mediaArray, setMediaArray] = useState([]);
-
-  useEffect(() => {
-     const getMedia = async () => {
-         try {
-           const mediaFiles = await fetchData(MEDIA_API + '/media');
-           const mediaFilesWithUsernames = await Promise.all(mediaFiles.map(async(mediaFile) => {
-            const user = await fetchData(`${AUTH_API}/users/${mediaFile.user_id}`)
-            return {...mediaFile, username: user.username};
-          }));
-           setMediaArray(mediaFilesWithUsernames);
-         } catch (error) {
-           console.error('Failed to fetch media:', error);
-         }
-     };
-     getMedia();
-   }, []);
+  const {mediaArray} = useMedia();
 
  console.log(mediaArray);
   return (

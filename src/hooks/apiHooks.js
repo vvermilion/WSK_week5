@@ -1,5 +1,5 @@
 import {fetchData} from '../utils/fetchData.js';
-import { useState, useEffect } from 'react';
+import {useState, useEffect} from 'react';
 
 const MEDIA_API = import.meta.env.VITE_MEDIA_API;
 const AUTH_API = import.meta.env.VITE_AUTH_API;
@@ -30,7 +30,6 @@ const useMedia = () => {
 };
 
 const useUser = () => {
-
   const getUserInformation = async (userId) => {
     const user = await fetchData(`${AUTH_API}/users/${userId}`);
     return user;
@@ -38,5 +37,22 @@ const useUser = () => {
   return {getUserInformation};
 };
 
+const useAuthentification = () => {
+  const postLogin = async (inputs) => {
+    const fetchOptions = {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(inputs),
+    };
+    const loginResult = await fetchData(
+      import.meta.env.VITE_AUTH_API + '/auth/login',
+      fetchOptions,
+    );
+    return loginResult;
+  };
+  return postLogin;
+};
 
-export {useMedia, useUser};
+export {useMedia, useUser, useAuthentification};

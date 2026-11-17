@@ -32,11 +32,15 @@ const Example = () => {
   return (
     <div>
       <p>Count: {count}</p>
-      <button onClick={addWithState}>Add</button>
+      <button className="examplebutton" onClick={addWithState}>
+        Add
+      </button>
       <h3>UseRef demo</h3>
       <input type="text" name="name" id="name" ref={inputRef} />
       <br />
-      <button onClick={handleFocus}>Focus input</button>
+      <button className="examplebutton" onClick={handleFocus}>
+        Focus input
+      </button>
     </div>
   );
 }

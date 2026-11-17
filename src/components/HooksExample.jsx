@@ -12,7 +12,7 @@ function HooksExample() {
   return (
     <div ref={testElement}>
       <p>You clicked {count} times</p>
-      <button onClick={() => setCount(count + 1)}>Click me</button>
+      <button className='examplebutton' onClick={() => setCount(count + 1)}>Click me</button>
     </div>
   );
 }

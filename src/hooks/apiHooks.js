@@ -34,7 +34,14 @@ const useUser = () => {
     const user = await fetchData(`${AUTH_API}/users/${userId}`);
     return user;
   };
-  return {getUserInformation};
+
+  const getUserByToken = async (token) => {
+    const result = await fetchData(`${AUTH_API}/users/token`, {
+      headers: {Authorization: 'Bearer ' + token},
+    });
+    return result.user;
+  };
+  return {getUserInformation, getUserByToken};
 };
 
 const useAuthentification = () => {

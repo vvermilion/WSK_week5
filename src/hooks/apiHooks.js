@@ -8,9 +8,9 @@ const useMedia = () => {
   const [mediaArray, setMediaArray] = useState([]);
 
   useEffect(() => {
-    const getMedia = async () => {
+    const getMedia = async (limit) => {
       try {
-        const mediaFiles = await fetchData(MEDIA_API + '/media');
+        const mediaFiles = await fetchData(MEDIA_API + '/media?limit=' + limit);
         const mediaFilesWithUsernames = await Promise.all(
           mediaFiles.map(async (mediaFile) => {
             const user = await fetchData(
@@ -24,7 +24,7 @@ const useMedia = () => {
         console.error('Failed to fetch media:', error);
       }
     };
-    getMedia();
+    getMedia(15);
   }, []);
   return {mediaArray};
 };

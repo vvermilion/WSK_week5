@@ -1,5 +1,6 @@
 import {useUser} from '../hooks/apiHooks';
 import useForm from '../hooks/formHooks';
+import PropTypes from 'prop-types';
 
 const RegisterForm = ({setDisplayLogin}) => {
   const {postRegistration} = useUser();
@@ -16,7 +17,9 @@ const RegisterForm = ({setDisplayLogin}) => {
       const result = await postRegistration(formData);
       console.log('registration result', result);
       alert('Registration successful, ' + result.message);
-      setDisplayLogin(true);
+      if (setDisplayLogin) {
+        setDisplayLogin(true);
+      }
     } catch (error) {
       console.log('Error', error);
       alert('Registration failed: ' + error.message);
@@ -63,6 +66,10 @@ const RegisterForm = ({setDisplayLogin}) => {
       </form>
     </>
   );
+};
+
+RegisterForm.propTypes = {
+  setDisplayLogin: PropTypes.func,
 };
 
 export default RegisterForm;

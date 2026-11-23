@@ -1,9 +1,8 @@
-import {useUser} from '../hooks/apiHooks';
 import {useEffect, useState} from 'react';
+import {fetchData} from '../utils/fetchData';
 
 const Profile = () => {
-  const {user, setUser} = useState({});
-  const {getUserByToken} = useUser();
+  const [user, setUser] = useState({});
   useEffect(() => {
     const getUserInfo = async () => {
       const token = localStorage.getItem('token');
@@ -12,7 +11,11 @@ const Profile = () => {
         return;
       }
       try {
-        const user = await getUserByToken(token);
+        const result = await fetchData(
+          `${import.meta.env.VITE_AUTH_API}/users/token`,
+          {headers: {Authorization: `Bearer ${token}`}},
+        );
+        const user = result.user;
         console.log('profile user:', user);
         setUser(user);
       } catch (error) {

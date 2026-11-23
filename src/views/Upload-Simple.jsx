@@ -1,7 +1,15 @@
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 const Upload = () => {
   const [file, setFile] = useState(null);
   const [fileUrl, setFileUrl] = useState(null);
+
+  useEffect(() => {
+    return () => {
+      if (fileUrl) {
+        URL.revokeObjectURL(fileUrl);
+      }
+    };
+  }, [fileUrl]);
 
   const handleSubmit = (event) => {
     event.preventDefault();

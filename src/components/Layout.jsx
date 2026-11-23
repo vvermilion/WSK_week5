@@ -1,26 +1,41 @@
-import { Link, Outlet } from "react-router";
+import {Link, Outlet} from 'react-router';
+import {useUserContext} from '../hooks/conxtextHooks';
+import {useEffect} from 'react';
 
 const Layout = () => {
+  const {user, handleAutoLogin} = useUserContext();
+
+  useEffect(() => {
+    handleAutoLogin();
+  }, []);
+
   return (
     <>
       <header>
+        <h1>My super media app</h1>
         <nav>
-          <ul id='nav'>
-            <li class='nav-item'>
+          <div>Hei {user?.username ?? 'vierailija'}!</div>
+          <ul>
+            <li>
               <Link to="/">Home</Link>
             </li>
-            <li class='nav-item'>
-              <Link to="/profile">Profile</Link>
+            <li>
+              <Link to="/demo">Demo</Link>
             </li>
-            <li class='nav-item'>
-              <Link to="/upload">Upload</Link>
-            </li>
-            <li class='nav-item'>
-              <Link to='/login'>Login</Link>
-            </li>
-            <li class='nav-item'>
-              <Link to='Demo'>Demo</Link>
-            </li>
+            {user ? (
+              <>
+                <li>
+                  <Link to="/profile">Profile</Link>
+                </li>
+                <li>
+                  <Link to="/upload">Upload</Link>
+                </li>
+              </>
+            ) : (
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+            )}
           </ul>
         </nav>
       </header>
@@ -32,6 +47,6 @@ const Layout = () => {
       </footer>
     </>
   );
-}
+};
 
-export default Layout
+export default Layout;

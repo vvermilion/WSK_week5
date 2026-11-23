@@ -3,16 +3,6 @@ import { useState, useEffect, useRef } from "react";
 const Example = () => {
   const [count, setCount] = useState(0);
 
-
-  // 1. ilman riippuvuustaulukkoa
-  // useEffect(fn)
-
-  // 2. komponentin mount vaiheessa
-  // useEffect(fn, [])
-
-  // 3. mount vaiheessa sekä count-arvon muuttuessa
-  // useEffect(fn, [count])
-
   useEffect(() => {
     console.log('Use effect triggered')
   }, [count]);
